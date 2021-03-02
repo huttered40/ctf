@@ -5,7 +5,12 @@
 #if FTN_UNDERSCORE
 #define DDOT ddot_
 #define SGEMM sgemm_
+#ifndef CRITTER
 #define DGEMM dgemm_
+#define DAXPY daxpy_
+#define DSYR   dsyr_
+#define DSCAL dscal_
+#endif
 #define CGEMM cgemm_
 #define ZGEMM zgemm_
 #define SGEMM_BATCH sgemm_batch_
@@ -13,11 +18,9 @@
 #define CGEMM_BATCH cgemm_batch_
 #define ZGEMM_BATCH zgemm_batch_
 #define SAXPY saxpy_
-#define DAXPY daxpy_
 #define CAXPY caxpy_
 #define ZAXPY zaxpy_
 #define SSYR   ssyr_
-#define DSYR   dsyr_
 #define CSYR   csyr_
 #define ZSYR   zsyr_
 #define SPOSV   sposv_
@@ -25,7 +28,6 @@
 #define CPOSV   cposv_
 #define ZPOSV   zposv_
 #define SSCAL sscal_
-#define DSCAL dscal_
 #define CSCAL cscal_
 #define ZSCAL zscal_
 #define SCOPY scopy_
@@ -34,7 +36,12 @@
 #else
 #define DDOT ddot
 #define SGEMM sgemm
+#ifndef CRITTER
 #define DGEMM dgemm
+#define DAXPY daxpy
+#define DSYR   dsyr
+#define DSCAL dscal
+#endif
 #define CGEMM cgemm
 #define ZGEMM zgemm
 #define SGEMM_BATCH sgemm_batch
@@ -42,11 +49,9 @@
 #define CGEMM_BATCH cgemm_batch
 #define ZGEMM_BATCH zgemm_batch
 #define SAXPY saxpy
-#define DAXPY daxpy
 #define CAXPY caxpy
 #define ZAXPY zaxpy
 #define SSYR   ssyr
-#define DSYR   dsyr
 #define CSYR   csyr
 #define ZSYR   zsyr
 #define SPOSV   sposv
@@ -54,7 +59,6 @@
 #define CPOSV   cposv
 #define ZPOSV   zposv
 #define SSCAL sscal
-#define DSCAL dscal
 #define CSCAL cscal
 #define ZSCAL zscal
 #define SCOPY scopy
@@ -64,6 +68,7 @@
 
 
 namespace CTF_BLAS {
+
   extern "C"
   double DDOT(int * n,         const double * dX,      
               int * incX,      const double * dY,      
@@ -84,8 +89,9 @@ namespace CTF_BLAS {
              float *,
              const int *);
 
-
+#ifndef CRITTER
   extern "C"
+#endif
   void DGEMM(const char *,
              const char *,
              const int *,
@@ -99,7 +105,6 @@ namespace CTF_BLAS {
              const double *,
              double *,
              const int *);
-
 
   extern "C"
   void CGEMM(const char *,
@@ -166,7 +171,9 @@ namespace CTF_BLAS {
              const int *   incY);
 
 
+#ifndef CRITTER
   extern "C"
+#endif
   void DAXPY(const int *    n,
              double *       dA,
              const double * dX,
@@ -200,7 +207,9 @@ namespace CTF_BLAS {
             const int *        LDA );
 
 
+#ifndef CRITTER
   extern "C"
+#endif
   void DSYR(const char *       UPLO ,
             const int *        N , 
             const double *     ALPHA, 
@@ -321,7 +330,9 @@ namespace CTF_BLAS {
              float *     dX,
              const int * incX);
 
+#ifndef CRITTER
   extern "C"
+#endif
   void DSCAL(const int * n,
              double *    dA,
              double *    dX,

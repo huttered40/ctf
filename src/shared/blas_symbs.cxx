@@ -157,3 +157,47 @@ namespace CTF_BLAS {
 #endif
 }
 #undef INST_GEMM_BATCH
+
+#ifdef CRITTER
+#include "critter_blas.h"
+namespace CTF_BLAS {
+  void DGEMM(const char * a,
+             const char * b,
+             const int * c,
+             const int * d,
+             const int * e,
+             const double * f,
+             const double * g,
+             const int * h,
+             const double * i,
+             const int * j,
+             const double * k,
+             double * l,
+             const int * m){
+    DGEMM_(a,b,c,d,e,f,g,h,i,j,k,l,m);
+  }
+  void DAXPY(const int *    n,
+             double *       dA,
+             const double * dX,
+             const int *    incX,
+             double *       dY,
+             const int *    incY){
+    DAXPY_(n,dA,dX,incX,dY,incY);
+  }
+  void DSYR(const char *       UPLO ,
+            const int *        N , 
+            const double *     ALPHA, 
+            const double *     X , 
+            const int *        INCX , 
+            double *           A , 
+            const int *        LDA ){
+    DSYR_(UPLO,N,ALPHA,X,INCX,A,LDA);
+  }
+  void DSCAL(const int * n,
+             double *    dA,
+             double *    dX,
+             const int * incX){
+    DSCAL_(n,dA,dX,incX);
+  }
+}
+#endif
